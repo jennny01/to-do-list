@@ -132,106 +132,97 @@ function home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">My Tasks</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2"
-          >
-            Logout
-          </button>
-        </div>
-
-        <div className="bg-white border border-gray-300 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold">Your Lists</h2>
-            <button
-              onClick={() => setShowDialog(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
-            >
-              + Add New List
-            </button>
-          </div>
-
-          {lists.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500">No lists yet. Create your first list to get started!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {lists.map((item, index) => (
-                <div
-                  key={item.id || index}
-                  className="border border-gray-300 p-4"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold">{item.title}</h3>
-                    <span className="bg-blue-100 text-blue-700 px-2 py-1 text-xs">
-                      {item.status}
-                    </span>
-                  </div>
-                  <p className="text-gray-500 text-sm mb-4">Click Open to view items</p>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => handleOpen(item)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white px-3 py-2 text-sm"
-                    >
-                      Open List
-                    </button>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleEdit(item)}
-                        className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 text-sm"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 text-sm"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+    <div className="min-h-screen p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">My Tasks</h1>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2"
+        >
+          Logout
+        </button>
       </div>
 
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-bold">Your Lists</h2>
+        <button
+          onClick={() => setShowDialog(true)}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+        >
+          + Add New List
+        </button>
+      </div>
+
+      {lists.length === 0 ? (
+        <p className="text-gray-500 py-4">No lists yet. Create your first list!</p>
+      ) : (
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-gray-300 text-left">
+              <th className="py-2">Title</th>
+              <th className="py-2">Status</th>
+              <th className="py-2 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lists.map((item, index) => (
+              <tr key={item.id || index} className="border-b border-gray-200">
+                <td className="py-3">{item.title}</td>
+                <td className="py-3">
+                  <span className="bg-blue-100 text-blue-700 px-2 py-1 text-xs">
+                    {item.status}
+                  </span>
+                </td>
+                <td className="py-3 text-right space-x-2">
+                  <button
+                    onClick={() => handleOpen(item)}
+                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm"
+                  >
+                    Open
+                  </button>
+                  <button
+                    onClick={() => handleEdit(item)}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 text-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
       {showDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white border border-gray-300 max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-center mb-4">
-              {editingItem ? "Edit List" : "Create New List"}
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white max-w-sm w-full p-6">
+            <h3 className="text-lg font-bold text-center mb-4">
+              {editingItem ? "Edit List" : "New List"}
             </h3>
-            <div className="mb-4">
-              <label className="block text-sm mb-1">List Title</label>
-              <input
-                type="text"
-                placeholder="Enter list name..."
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm mb-1">Status</label>
-              <select
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="">Select status...</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
-            <div className="flex justify-end gap-2">
+            <input
+              type="text"
+              placeholder="List name"
+              className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <select
+              className="w-full px-3 py-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="">Select status...</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <div className="flex gap-2">
               <button
                 onClick={() => {
                   setShowDialog(false);
@@ -239,13 +230,13 @@ function home() {
                   setTitle("");
                   setStatus("");
                 }}
-                className="px-4 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300"
+                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
+                className="flex-1 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
               >
                 {editingItem ? "Update" : "Create"}
               </button>

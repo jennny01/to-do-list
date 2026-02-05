@@ -47,90 +47,72 @@ function register() {
   };
 
   return(
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        <div className="bg-white border border-gray-300 p-6">
-          <h1 className="text-xl font-bold text-center mb-6">Create Account</h1>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-xs">
+        <h1 className="text-xl font-bold text-center mb-6">Create Account</h1>
 
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 text-sm">
-              {error}
-            </div>
-          )}
+        {error && (
+          <p className="mb-4 text-red-600 text-sm">{error}</p>
+        )}
 
-          <form onSubmit={handleRegister}>
-            <div className="mb-4">
-              <label className="block text-sm mb-1">Full Name</label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  if (error) setError('');
-                }}
-              />
-            </div>
+        <form onSubmit={handleRegister}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (error) setError('');
+            }}
+          />
 
-            <div className="mb-4">
-              <label className="block text-sm mb-1">Username</label>
-              <input
-                type="text"
-                placeholder="Choose a username"
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                  if (error) setError('');
-                }}
-              />
-            </div>
+          <input
+            type="text"
+            placeholder="Username"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              if (error) setError('');
+            }}
+          />
 
-            <div className="mb-4">
-              <label className="block text-sm mb-1">Password</label>
-              <input
-                type="password"
-                placeholder="Create a password (min. 6 characters)"
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  if (error) setError('');
-                }}
-              />
-            </div>
+          <input
+            type="password"
+            placeholder="Password (min. 6 characters)"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (error) setError('');
+            }}
+          />
 
-            <div className="mb-4">
-              <label className="block text-sm mb-1">Confirm Password</label>
-              <input
-                type="password"
-                placeholder="Confirm your password"
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-blue-500"
-                value={confirmPass}
-                onChange={(e) => {
-                  setConfirmPass(e.target.value);
-                  if (error) setError('');
-                }}
-              />
-            </div>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="w-full px-3 py-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+            value={confirmPass}
+            onChange={(e) => {
+              setConfirmPass(e.target.value);
+              if (error) setError('');
+            }}
+          />
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Creating account...' : 'Create Account'}
-            </button>
-          </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            {loading ? 'Creating account...' : 'Create Account'}
+          </button>
+        </form>
 
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{' '}
-            <a href="/" className="text-blue-600 hover:underline">
-              Login here
-            </a>
-          </div>
-        </div>
+        <p className="mt-4 text-center text-sm">
+          Already have an account?{' '}
+          <a href="/" className="text-blue-600 hover:underline">Login here</a>
+        </p>
       </div>
     </div>
   );
