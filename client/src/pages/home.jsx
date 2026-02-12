@@ -132,88 +132,98 @@ function home() {
   }, []);
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">My Tasks</h1>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2"
-        >
-          Logout
-        </button>
-      </div>
-
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">Your Lists</h2>
-        <button
-          onClick={() => setShowDialog(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
-        >
-          + Add New List
-        </button>
+    <div className="min-h-screen p-6 bg-gradient-to-br from-orange-100 to-red-100">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-black" style={{ color: '#FF6347' }}>My Daily Tasks</h1>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowDialog(true)}
+            className="text-white px-6 py-2 font-bold hover:opacity-90 transition"
+            style={{ backgroundColor: '#FF6347' }}
+          >
+             Add
+          </button>
+          <button
+            onClick={handleLogout}
+            className="text-white px-6 py-2 font-bold hover:opacity-90 transition"
+            style={{ backgroundColor: '#FF6347' }}
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {lists.length === 0 ? (
-        <p className="text-gray-500 py-4">No lists yet. Create your first list!</p>
+        <p className="text-gray-600 py-8 text-lg font-medium">No lists yet. Create your first list to get started!</p>
       ) : (
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-300 text-left">
-              <th className="py-2">Title</th>
-              <th className="py-2">Status</th>
-              <th className="py-2 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lists.map((item, index) => (
-              <tr key={item.id || index} className="border-b border-gray-200">
-                <td className="py-3">{item.title}</td>
-                <td className="py-3">
-                  <span className="bg-blue-100 text-blue-700 px-2 py-1 text-xs">
-                    {item.status}
-                  </span>
-                </td>
-                <td className="py-3 text-right space-x-2">
-                  <button
-                    onClick={() => handleOpen(item)}
-                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm"
-                  >
-                    Open
-                  </button>
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 text-sm"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-sm"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#FF6347' }}>Your Lists</h2>
+          <div className="bg-white shadow-lg p-6">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b-2" style={{ borderColor: '#FF6347' }}>
+                <th className="py-3 text-left font-bold" style={{ color: '#FF6347' }}>Title</th>
+                <th className="py-3 text-left font-bold" style={{ color: '#FF6347' }}>Status</th>
+                <th className="py-3 text-right font-bold" style={{ color: '#FF6347' }}>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {lists.map((item, index) => (
+                <tr key={item.id || index} className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="py-3 font-medium">{item.title}</td>
+                  <td className="py-3">
+                    <span className="px-3 py-1 text-xs font-bold text-white" style={{ backgroundColor: '#FF6347' }}>
+                      {item.status}
+                    </span>
+                  </td>
+                  <td className="py-3 text-right space-x-2">
+                    <button
+                      onClick={() => handleOpen(item)}
+                      className="text-white px-4 py-1 text-sm font-bold hover:opacity-90 transition"
+                      style={{ backgroundColor: '#28a745' }}
+                    >
+                      Open
+                    </button>
+                    <button
+                      onClick={() => handleEdit(item)}
+                      className="text-white px-4 py-1 text-sm font-bold hover:opacity-90 transition"
+                      style={{ backgroundColor: '#ffc107' }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="text-white px-4 py-1 text-sm font-bold hover:opacity-90 transition"
+                      style={{ backgroundColor: '#dc3545' }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+        </>
       )}
 
       {showDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-          <div className="bg-white max-w-sm w-full p-6">
-            <h3 className="text-lg font-bold text-center mb-4">
+        <div className="fixed inset-0 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white max-w-sm w-full p-8 rounded-lg shadow-2xl">
+            <h3 className="text-2xl font-black text-center mb-4" style={{ color: '#FF6347' }}>
               {editingItem ? "Edit List" : "New List"}
             </h3>
             <input
               type="text"
               placeholder="List name"
-              className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-3 mb-4 border-2 border-gray-300 focus:outline-none transition font-medium"
+              style={{ borderColor: '#FF6347', outlineColor: '#FF6347' }}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <select
-              className="w-full px-3 py-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-3 mb-6 border-2 border-gray-300 focus:outline-none transition font-medium"
+              style={{ borderColor: '#FF6347' }}
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
@@ -230,13 +240,14 @@ function home() {
                   setTitle("");
                   setStatus("");
                 }}
-                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300"
+                className="flex-1 px-4 py-2 bg-gray-300 hover:bg-gray-400 font-bold transition"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
+                className="flex-1 px-4 py-3 text-white font-bold hover:opacity-90 transition"
+                style={{ backgroundColor: '#FF6347' }}
               >
                 {editingItem ? "Update" : "Create"}
               </button>

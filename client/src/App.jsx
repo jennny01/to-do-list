@@ -35,12 +35,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-xs">
-        <h1 className="text-xl font-bold text-center mb-6">Login</h1>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-100 to-red-100">
+      <div className="w-full max-w-4xl bg-white shadow-2xl p-12">
+        <h1 className="text-4xl font-black text-center mb-2" style={{ color: '#FF6347' }}>
+          Welcome
+        </h1>
+        <p className="text-center text-gray-600 font-light text-sm mb-6">Get your tasks done efficiently</p>
 
         {error && (
-          <p className="mb-4 text-red-600 text-sm">{error}</p>
+          <p className="mb-4 text-red-600 text-sm font-semibold bg-red-50 p-3 rounded">{error}</p>
         )}
 
         <form onSubmit={handleLogin}>
@@ -52,7 +55,7 @@ function App() {
               setUsername(e.target.value);
               if (error) setError('');
             }}
-            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-3 mb-4 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
           />
 
           <input
@@ -63,21 +66,22 @@ function App() {
               setPassword(e.target.value);
               if (error) setError('');
             }}
-            className="w-full px-3 py-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-3 mb-6 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold hover:from-red-600 hover:to-red-700 disabled:opacity-50 transition text-lg"
+            style={{ backgroundColor: loading ? '#FF6347' : 'linear-gradient(to right, #FF6347, #FF5349)' }}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Logging in...' : 'Start Your Day'}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm">
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-600 hover:underline">Sign up</a>
+        <p className="mt-6 text-center text-sm font-medium text-gray-600">
+          New here?{' '}
+          <a href="/register" className="font-bold" style={{ color: '#FF6347' }}>Create an account</a>
         </p>
       </div>
     </div>

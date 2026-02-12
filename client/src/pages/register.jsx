@@ -47,19 +47,22 @@ function register() {
   };
 
   return(
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-xs">
-        <h1 className="text-xl font-bold text-center mb-6">Create Account</h1>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-100 to-red-100">
+      <div className="w-full max-w-4xl bg-white shadow-2xl p-12">
+        <h1 className="text-4xl font-black text-center mb-2" style={{ color: '#FF6347' }}>
+          Create Account
+        </h1>
+        <p className="text-center text-gray-600 font-light text-sm mb-6">Start organizing your day today</p>
 
         {error && (
-          <p className="mb-4 text-red-600 text-sm">{error}</p>
+          <p className="mb-4 text-red-600 text-sm font-semibold bg-red-50 p-3">{error}</p>
         )}
 
         <form onSubmit={handleRegister}>
           <input
             type="text"
-            placeholder="Full Name"
-            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            placeholder="Your Full Name"
+            className="w-full px-4 py-3 mb-4 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -70,7 +73,7 @@ function register() {
           <input
             type="text"
             placeholder="Username"
-            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-3 mb-4 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
@@ -81,7 +84,7 @@ function register() {
           <input
             type="password"
             placeholder="Password (min. 6 characters)"
-            className="w-full px-3 py-2 mb-3 border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-3 mb-4 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -92,7 +95,7 @@ function register() {
           <input
             type="password"
             placeholder="Confirm Password"
-            className="w-full px-3 py-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-3 mb-6 border-2 border-gray-300 focus:outline-none focus:border-red-400 transition font-medium"
             value={confirmPass}
             onChange={(e) => {
               setConfirmPass(e.target.value);
@@ -103,15 +106,16 @@ function register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold hover:from-red-600 hover:to-red-700 disabled:opacity-50 transition text-lg"
+            style={{ backgroundColor: loading ? '#FF6347' : 'linear-gradient(to right, #FF6347, #FF5349)' }}
           >
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? 'Creating account...' : 'Get Started'}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm">
+        <p className="mt-6 text-center text-sm font-medium text-gray-600">
           Already have an account?{' '}
-          <a href="/" className="text-blue-600 hover:underline">Login here</a>
+          <a href="/" className="font-bold" style={{ color: '#FF6347' }}>Sign in instead</a>
         </p>
       </div>
     </div>
